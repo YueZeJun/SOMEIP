@@ -1,0 +1,30 @@
+[build-system]
+# Minimum requirements for the build system to execute.
+requires = ['setuptools', 'wheel', 'pip', 'setuptools_scm[toml]>=3.4']
+build-backend = 'setuptools.build_meta'
+
+[tool.setuptools_scm]
+version_scheme = 'python-simplified-semver'
+
+[tool.coverage.run]
+branch = true
+source = [
+    'someip'
+]
+
+[tool.coverage.paths]
+source = [
+    'src/',
+    '*/site-packages/',
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    '^\s*\.\.\.\s*(#|$)',
+    '#\s*(pragma|PRAGMA)[:\s]?\s*(no|NO)\s*(cover|COVER)'
+]
+
+[tool.black]
+target_version = [
+    'py38',
+]
