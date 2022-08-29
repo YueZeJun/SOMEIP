@@ -282,9 +282,9 @@ class SD(_SDPacketBase):
         ByteField("flags", 0),                                                                              # Flags[8bit]
         X3BytesField("res", 0),                                                                             # Reserved[24bit]
         FieldLenField("len_entry_array", None, length_of="entry_array", fmt="!I"),                          # Length of Entries Array[32bit]
-        PacketListField("entry_array", None, cls=_SDEntry, length_from=lambda pkt:pkt.len_entry_array),     # Entries Array[variable size]
+        PacketListField("entry_array", None, pkt_cls=_SDEntry, length_from=lambda pkt:pkt.len_entry_array),     # Entries Array[variable size]
         FieldLenField("len_option_array", None, length_of="option_array", fmt="!I"),                        # Length of Options Array[32bit]
-        PacketListField("option_array", None, cls=_SDOption, length_from=lambda pkt:pkt.len_option_array)]  # Options Array[variable size]
+        PacketListField("option_array", None, pkt_cls=_SDOption, length_from=lambda pkt:pkt.len_option_array)]  # Options Array[variable size]
 
     def __init__(self, *args, **kwargs):
         super(SD, self).__init__(*args, **kwargs)
@@ -300,8 +300,8 @@ class SD(_SDPacketBase):
 
     def setFlag(self, name, value):
         """
-        Set particular flag on bitfield.
-         :param str name : name of the flag to set (see SD.FLAGSDEF)
+         用于设置SOMEIP header之后的Flags[8bit],Flags中包含两个标志位Reboot Flag和Unicast Flag
+         param str name : name of the flag to set (see SD.FLAGSDEF)
          :param int value : either 0x1 or 0x0 (provided int will be ANDed with 0x01)
         """
         name = name.upper()
