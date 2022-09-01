@@ -4,7 +4,7 @@ from scapy.all import *
 from scapy.layers.inet6 import IP6Field
 import ctypes
 import collections
-from SOMEIP import SOMEIP
+from SOMEIP_Protocol import SOMEIP
 
 
 class _SDPacketBase(Packet):
